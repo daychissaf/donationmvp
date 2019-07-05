@@ -1,15 +1,13 @@
 package com.project.donation.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@SequenceGenerator(name="ASSOCIATION_SQ", sequenceName="association_sequence")
 public class Association {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "ASSOCIATION_SQ")
     private Long idAssociation;
     private String associationName;
 

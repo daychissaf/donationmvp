@@ -1,15 +1,13 @@
 package com.project.donation.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity(name="account")
+@SequenceGenerator(name="USER_SQ", sequenceName="user_sequence")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "USER_SQ")
     private Long idUser;
 
     private String firstName;

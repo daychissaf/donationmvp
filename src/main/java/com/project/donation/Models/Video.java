@@ -3,9 +3,10 @@ package com.project.donation.Models;
 import javax.persistence.*;
 
 @Entity
+@SequenceGenerator(name="VIDEO_SQ", sequenceName="video_sequence")
 public class Video {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "VIDEO_SQ")
     private Long idVideo;
     private String videoTitle;
     private String link;

@@ -4,10 +4,11 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@SequenceGenerator(name="PROJECT_SQ", sequenceName="project_sequence")
 public class Project {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "PROJECT_SQ")
     private Long idProject;
     private String projectTitle;
     private String description;
