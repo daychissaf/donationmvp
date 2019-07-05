@@ -51,6 +51,6 @@ public class AssociationServiceImpl implements AssociationService {
             associationRepository.deleteById(idAssociation);
             return true;
         }
-        return true;
+        return false;
     }
 }
