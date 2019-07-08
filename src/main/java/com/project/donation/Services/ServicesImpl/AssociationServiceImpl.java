@@ -1,8 +1,11 @@
 package com.project.donation.Services.ServicesImpl;
 
 import com.project.donation.Models.Association;
+import com.project.donation.Models.Project;
 import com.project.donation.Repositories.AssociationRepository;
+import com.project.donation.Repositories.ProjectRepository;
 import com.project.donation.Services.AssociationService;
+import com.project.donation.Services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +49,9 @@ public class AssociationServiceImpl implements AssociationService {
     @Override
     public boolean deleteAssociation(Long idAssociation) {
 
+        // i have to delete all projects taken by this association
+        ProjectService projectService = new ProjectServiceImpl();
+        projectService.deleteByAssociation(idAssociation);
 
         if (!associationRepository.findById(idAssociation).equals(Optional.empty())) {
             associationRepository.deleteById(idAssociation);
