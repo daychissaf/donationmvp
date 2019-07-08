@@ -4,7 +4,8 @@ import javax.persistence.*;
 
 @Entity
 @SequenceGenerator(name="ASSOCIATION_SQ", sequenceName="association_sequence")
-public class Association {
+public class
+Association {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "ASSOCIATION_SQ")

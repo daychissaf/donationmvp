@@ -15,21 +15,21 @@ public class ProjectCrudController {
 
     @GetMapping("/projects")
     public List<Project> projects(){
-      return null;
+        return projectService.getAllAProjects();
     }
 
     @PostMapping("/createProject")
     public Boolean createProject(@RequestBody Project project){
-        return null;
+        return projectService.createProject(project);
     }
 
     @PutMapping("/updateProject/{idProject}")
     public Boolean updateProject(@PathVariable("idProject") Long idProject, @RequestBody Project project){
-        return null;
+        return projectService.updateProject(idProject,project);
     }
 
     @DeleteMapping("/deleteProject/{idProject}")
     public Boolean deleteProject(@PathVariable("idProject") Long idProject){
-        return null;
+        return projectService.deleteProject(idProject);
     }
 }
