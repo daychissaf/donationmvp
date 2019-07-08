@@ -17,7 +17,8 @@ public class AssociationServiceImpl implements AssociationService {
 
     @Autowired
     AssociationRepository associationRepository;
-
+    @Autowired
+    ProjectService projectService;
     @Override
     public List<Association> getAllAssocations() {
 
@@ -50,7 +51,6 @@ public class AssociationServiceImpl implements AssociationService {
     public boolean deleteAssociation(Long idAssociation) {
 
         // i have to delete all projects taken by this association
-        ProjectService projectService = new ProjectServiceImpl();
         projectService.deleteByAssociation(idAssociation);
 
         if (!associationRepository.findById(idAssociation).equals(Optional.empty())) {

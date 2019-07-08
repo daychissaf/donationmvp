@@ -52,4 +52,11 @@ public class VideoServiceImpl implements VideoService {
         videoRepository.deleteById(idVideo);
         return true;
     }
+
+    @Override
+    public void deletebySponsor(Long idSponsor) {
+        for(Video video: videoRepository.findAll()) {
+            if(video.getSponsor().getIdSponsor() == idSponsor) deleteVideo(video.getIdVideo());
+        }
+    }
 }

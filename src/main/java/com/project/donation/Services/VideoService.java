@@ -10,4 +10,6 @@ public interface VideoService {
     boolean createVideo(Video video);
     boolean updateVideo(Long idVideo, Video video);
     boolean deleteVideo(Long idVideo);
+
+    void deletebySponsor(Long idSponsor);
 }

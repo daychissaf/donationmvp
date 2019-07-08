@@ -2,8 +2,10 @@ package com.project.donation.Services.ServicesImpl;
 
 
 import com.project.donation.Models.Sponsor;
+import com.project.donation.Models.Video;
 import com.project.donation.Repositories.SponsorRepository;
 import com.project.donation.Services.SponsorService;
+import com.project.donation.Services.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,8 @@ public class SponsorServiceImpl implements SponsorService {
 
     @Autowired
     SponsorRepository sponsorRepository;
-
+    @Autowired
+    VideoService videoService;
 
     @Override
     public List<Sponsor> getAllSponsors() {
@@ -57,6 +60,8 @@ public class SponsorServiceImpl implements SponsorService {
 
     @Override
     public boolean deleteSponsor(Long idSponsor) {
+        // I have to delete all videos of the sponsor
+        videoService.deletebySponsor(idSponsor);
         if(!sponsorRepository.findById(idSponsor).equals(Optional.empty())) {
             sponsorRepository.deleteById(idSponsor);
             return true;
