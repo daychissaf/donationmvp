@@ -15,22 +15,22 @@ public class VideoCrudController {
 
     @GetMapping("/videos")
     public List<Video> videos(){
-        return null;
+        return videoService.getAllVideos();
     }
 
     @PostMapping("/createVideo")
     public Boolean createVideo(@RequestBody Video video){
-        return null;
+        return videoService.createVideo(video);
     }
 
     @PutMapping("/updateVideo/{idVideo}")
     public Boolean updateVideo(@PathVariable("idVideo") Long idVideo, @RequestBody Video video){
-        return null;
+        return videoService.updateVideo(idVideo, video);
     }
 
     @DeleteMapping("/deleteVideo/{idVideo}")
     public Boolean deleteVideo(@PathVariable("idVideo") Long idVideo){
-        return null;
+        return videoService.deleteVideo(idVideo);
     }
 }
 

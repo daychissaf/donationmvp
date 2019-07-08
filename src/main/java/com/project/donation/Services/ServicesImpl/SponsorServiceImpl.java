@@ -23,6 +23,16 @@ public class SponsorServiceImpl implements SponsorService {
     }
 
     @Override
+    public boolean sponsorExists(Long idSponsor) {
+        List<Sponsor> sponsors = sponsorRepository.findAll();
+        if (sponsors == null) return false;
+        for (Sponsor sponsor : sponsors) {
+            if (sponsor.getIdSponsor() ==  idSponsor) return true;
+        }
+        return false;
+    }
+
+    @Override
     public boolean createSponsor(Sponsor sponsor) {
 
         if(sponsor.getSponsorName() == null) return false;
