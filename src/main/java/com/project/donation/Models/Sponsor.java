@@ -11,6 +11,15 @@ public class Sponsor {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "SPONSOR_SQ")
     private Long idSponsor;
     private String sponsorName;
+    private boolean active;
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
     public String getSponsorName() {
         return sponsorName;

@@ -62,8 +62,10 @@ public class SponsorServiceImpl implements SponsorService {
     public boolean deleteSponsor(Long idSponsor) {
         // I have to delete all videos of the sponsor
         videoService.deletebySponsor(idSponsor);
-        if(!sponsorRepository.findById(idSponsor).equals(Optional.empty())) {
-            sponsorRepository.deleteById(idSponsor);
+        Optional<Sponsor> sponsor = sponsorRepository.findById(idSponsor);
+        if(!sponsor.equals(Optional.empty())) {
+            sponsor.get().setActive(false);
+            sponsorRepository.save(sponsor.get());
             return true;
         }
         return false;

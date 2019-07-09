@@ -3,6 +3,7 @@ package com.project.donation.Services.ServicesImpl;
 
 import com.project.donation.Models.Association;
 import com.project.donation.Models.Project;
+import com.project.donation.Models.Video;
 import com.project.donation.Repositories.ProjectRepository;
 import com.project.donation.Services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,22 +46,27 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public boolean deleteByAssociation(Long associationId) {
-
-        for(Project project:projectRepository.findAll()){
-            if(project.getAssociation().getIdAssociation()==associationId){
-                projectRepository.deleteById(project.getIdProject());
-            }
+    public Boolean deleteProject(Long idProject) {
+        Optional<Project> project = projectRepository.findById(idProject);
+        if (!project.equals(Optional.empty())) {
+            project.get().setActive(false);
+            projectRepository.save(project.get());
+            return true;
         }
         return false;
     }
 
     @Override
-    public Boolean deleteProject(Long idProject) {
-        if (!projectRepository.findById(idProject).equals(Optional.empty())) {
-            projectRepository.deleteById(idProject);
-            return true;
+    public void deleteByVideo(Long idVideo) {
+        //delete projects that contain only this video
+        int i;
+        for(Project project: projectRepository.findAll()) {
+            i=-1;
+            for(Video video: project.getVideos()) {
+                if (video.getIdVideo() == idVideo ) i=project.getVideos().indexOf(video);
+            }
+            if(i>-1) project.getVideos().remove(i);
+            if(project.getVideos().size()==0) deleteProject(project.getIdProject());
         }
-        return false;
     }
 }

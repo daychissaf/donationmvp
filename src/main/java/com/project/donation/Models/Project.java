@@ -19,6 +19,15 @@ public class Project {
     @ManyToMany
     private List<Video> videos;
 
+    private boolean active;
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
     public List<Video> getVideos() {
         return videos;
     }

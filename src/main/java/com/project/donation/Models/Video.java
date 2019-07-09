@@ -10,6 +10,15 @@ public class Video {
     private Long idVideo;
     private String videoTitle;
     private String link;
+    private boolean active;
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
     @ManyToOne
     private Sponsor sponsor;

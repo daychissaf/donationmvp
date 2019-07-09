@@ -3,6 +3,7 @@ package com.project.donation.Services.ServicesImpl;
 import com.project.donation.Models.Sponsor;
 import com.project.donation.Models.Video;
 import com.project.donation.Repositories.VideoRepository;
+import com.project.donation.Services.ProjectService;
 import com.project.donation.Services.SponsorService;
 import com.project.donation.Services.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class VideoServiceImpl implements VideoService {
 
     @Autowired
     SponsorService sponsorService;
+
+    @Autowired
+    ProjectService projectService;
 
     @Override
     public List<Video> getAllVideos() {
@@ -47,10 +51,15 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     public boolean deleteVideo(Long idVideo) {
+        // I have to delete all projects containing only this video
+        projectService.deleteByVideo(idVideo);
         Video video1 = videoRepository.findById(idVideo).get();
-        if(video1.equals(Optional.empty())) return false;
-        videoRepository.deleteById(idVideo);
-        return true;
+        if(!video1.equals(Optional.empty())) {
+            video1.setActive(false);
+            videoRepository.save(video1);
+            return true;
+        }
+        return false;
     }
 
     @Override

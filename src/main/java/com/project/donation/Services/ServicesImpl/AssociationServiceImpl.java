@@ -50,11 +50,10 @@ public class AssociationServiceImpl implements AssociationService {
     @Override
     public boolean deleteAssociation(Long idAssociation) {
 
-        // i have to delete all projects taken by this association
-        projectService.deleteByAssociation(idAssociation);
-
-        if (!associationRepository.findById(idAssociation).equals(Optional.empty())) {
-            associationRepository.deleteById(idAssociation);
+        Optional<Association> association = associationRepository.findById(idAssociation);
+        if (!association.equals(Optional.empty())) {
+            association.get().setActive(false);
+            associationRepository.save(association.get());
             return true;
         }
         return false;

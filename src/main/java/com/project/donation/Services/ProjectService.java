@@ -11,8 +11,8 @@ public interface ProjectService {
     Boolean createProject(Project project);
 
     Boolean updateProject(Long idProject, Project project);
-    
-    boolean deleteByAssociation(Long associationId);
 
     Boolean deleteProject(Long idProject);
+
+    void deleteByVideo(Long idVideo);
 }

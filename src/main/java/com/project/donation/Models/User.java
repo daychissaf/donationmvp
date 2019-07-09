@@ -14,6 +14,15 @@ public class User {
     private String lastName;
     private String email;
     private String password;
+    private boolean active;
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
     public Long getIdUser() {
         return idUser;

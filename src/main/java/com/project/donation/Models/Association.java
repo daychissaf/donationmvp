@@ -11,6 +11,15 @@ Association {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "ASSOCIATION_SQ")
     private Long idAssociation;
     private String associationName;
+    private boolean active;
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
     public Long getIdAssociation() {
         return idAssociation;
