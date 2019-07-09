@@ -4,6 +4,7 @@ import com.project.donation.Models.User;
 import com.project.donation.Repositories.UserRepository;
 import com.project.donation.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public boolean userExists(String email) {
@@ -35,6 +39,7 @@ public class UserServiceImpl implements UserService {
 
         if( userExists(user.getEmail()) ) return false;
         if(user.getFirstName() == null || user.getLastName() == null || user.getEmail() == null || user.getPassword() == null) return false;
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return true;
     }
