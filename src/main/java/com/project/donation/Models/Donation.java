@@ -1,7 +1,6 @@
 package com.project.donation.Models;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @SequenceGenerator(name="DONATION_SQ", sequenceName="donation_sequence")
@@ -12,7 +11,7 @@ public class Donation {
     private Long idDonation;
 
     @ManyToOne
-    private User user;
+    private Donor user;
     @ManyToOne
     private Project project;
 
@@ -24,11 +23,11 @@ public class Donation {
         this.idDonation = idDonation;
     }
 
-    public User getUser() {
+    public Donor getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Donor user) {
         this.user = user;
     }
 

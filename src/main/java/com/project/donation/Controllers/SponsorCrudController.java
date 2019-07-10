@@ -1,9 +1,7 @@
 package com.project.donation.Controllers;
 
 import com.project.donation.Models.Sponsor;
-import com.project.donation.Models.User;
 import com.project.donation.Services.SponsorService;
-import com.project.donation.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

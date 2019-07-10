@@ -1,33 +1,33 @@
 package com.project.donation.Services.ServicesImpl;
 
-import com.project.donation.Models.User;
-import com.project.donation.Repositories.UserRepository;
-import com.project.donation.Services.UserService;
+import com.project.donation.Models.Donor;
+import com.project.donation.Repositories.DonorRepository;
+import com.project.donation.Services.DonorService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class DonorServiceImpl implements DonorService {
 
     @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    DonorRepository userRepository;
 
     @Override
     public boolean userExists(String email) {
 
-        List<User> users;
+        List<Donor> users;
         users=userRepository.findAll();
 
         if(users == null) return false;
 
-        for(User user: users) {
+        for(Donor user: users) {
 
             if(user.getEmail().equals(email)) return true;
         }
@@ -35,25 +35,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean createUser(User user) {
+    public boolean createUser(Donor user) {
 
         if( userExists(user.getEmail()) ) return false;
         if(user.getFirstName() == null || user.getLastName() == null || user.getEmail() == null || user.getPassword() == null) return false;
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return true;
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<Donor> getAllUsers() {
 
         return userRepository.findAll();
     }
 
     @Override
-    public boolean updateUser(Long idUser, User user) {
+    public boolean updateUser(Long idUser, Donor user) {
 
-        User user1=userRepository.findById(idUser).get();
+        Donor user1=userRepository.findById(idUser).get();
 
 
         if (!user1.equals(Optional.empty())) {
@@ -73,7 +72,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean deleteUser(Long idUser) {
-        Optional<User> user = userRepository.findById(idUser);
+        Optional<Donor> user = userRepository.findById(idUser);
         if(!user.equals(Optional.empty())) {
             user.get().setActive(false);
             userRepository.save(user.get());
@@ -81,5 +80,6 @@ public class UserServiceImpl implements UserService {
         }
         return false;
     }
+
 }
 

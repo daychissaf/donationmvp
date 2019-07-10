@@ -1,7 +1,6 @@
 package com.project.donation.Services;
 
 import com.project.donation.Models.Sponsor;
-import com.project.donation.Models.User;
 
 import java.util.List;
 

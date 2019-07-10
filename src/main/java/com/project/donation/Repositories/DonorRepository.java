@@ -1,9 +1,9 @@
 package com.project.donation.Repositories;
 
-import com.project.donation.Models.User;
+import com.project.donation.Models.Donor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface DonorRepository extends JpaRepository<Donor, Long> {
 
 
 

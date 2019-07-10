@@ -2,19 +2,28 @@ package com.project.donation.Models;
 
 import javax.persistence.*;
 
-@Entity(name="account")
+@Entity()
 @SequenceGenerator(name="USER_SQ", sequenceName="user_sequence")
-public class User {
+public class Donor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "USER_SQ")
-    private Long idUser;
+    private Long idDonor;
 
     private String firstName;
     private String lastName;
     private String email;
     private String password;
     private boolean active;
+    private String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public boolean isActive() {
         return active;
@@ -24,12 +33,12 @@ public class User {
         this.active = active;
     }
 
-    public Long getIdUser() {
-        return idUser;
+    public Long getIdDonor() {
+        return idDonor;
     }
 
-    public void setIdUser(Long idUser) {
-        this.idUser = idUser;
+    public void setIdDonor(Long idDonor) {
+        this.idDonor = idDonor;
     }
 
     public String getFirstName() {
